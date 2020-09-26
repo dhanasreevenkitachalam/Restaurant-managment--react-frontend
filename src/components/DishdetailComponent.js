@@ -13,17 +13,17 @@ import {Card, CardImg, CardTitle,CardBody,CardText, ListGroup, ListGroupItem } f
             (com)=>{
 
                 return (
-                <ListGroup key={com.id}>
+                <ul key={com.id} className="list-unstyled">
 
-            <ListGroupItem className="border-0">{com.comment}</ListGroupItem>
-            <ListGroupItem  className="border-0">
+            <li >{com.comment}</li>
+            <li >
                 <span>--</span>
                 <span>{com.author}</span>
                 <span>,</span>
                 <span>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(com.date)))}</span>
 
-            </ListGroupItem>
-                </ListGroup>
+            </li>
+                </ul>
                 );
 
             }
@@ -55,10 +55,11 @@ import {Card, CardImg, CardTitle,CardBody,CardText, ListGroup, ListGroupItem } f
   }
 
   const DishDetail= (props)=>{
-    function  dishrender(){ 
+    if (props.dish!=null){
           return(
+    
 
-           
+                                <div className="container">
             
                                 <div className="row">
 
@@ -77,26 +78,19 @@ import {Card, CardImg, CardTitle,CardBody,CardText, ListGroup, ListGroupItem } f
                              </div>
 
 
-                    
+                            </div>
 
                              </div>
 
 
 
 
-        );
+        )
 
-     }
- 
-     return(
- <div className="container">
-    
-         {dishrender()}
-
- </div>
-
-     );
-
+          }
+else {return(
+    <div></div>
+)}
   }
 
 
