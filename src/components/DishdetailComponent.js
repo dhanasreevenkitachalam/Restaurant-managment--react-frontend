@@ -7,6 +7,7 @@ import Loading from './LoadingComponent';
 import { Button ,Modal,ModalBody,ModalHeader,Label,Row,Col} from 'reactstrap';
 import {LocalForm,Control,Errors} from 'react-redux-form';
 
+import { baseUrl } from '../shared/baseUrl';
 
 
 const required = (val) => val && val.length;
@@ -162,7 +163,7 @@ render(){
 
     return(
         <Card>
-        <CardImg top src={dish.image} alt={dish.name} />
+  <CardImg top src={baseUrl + dish.image} alt={dish.name} />
         <CardBody>
         <CardTitle>{dish.name}</CardTitle>
         <CardText>{dish.description}</CardText>
