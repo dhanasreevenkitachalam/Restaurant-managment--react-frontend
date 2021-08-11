@@ -1,6 +1,9 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import Loading from './LoadingComponent';
+import { Fade, Stagger } from 'react-animation-components';
 
 function About(props) {
 
@@ -8,31 +11,48 @@ function About(props) {
         return (
             <div className="col-12 mt-5">
             <div key={leader.id}>
-                <RenderLeader lead={leader}/>
+                <RenderLeader lead={leader} isLoading={props.isLoading} errMess={props.errMess}/>
             </div>
             </div>
         );
     });
 
-function RenderLeader({lead}){
-    return(
+function RenderLeader({lead,isLoading,errMess}){
+    if (isLoading) {
+        return(
+                <Loading />
+        );
+    }
+    else if (errMess) {
+        return(
+                <h4>{errMess}</h4>
+        );
+    }
+    else{
 
-        <Media tag="li">
-        <Media left  middle href="#">
-            <Media object src={lead.image} alt="alberto" />
-        </Media>
-        <Media body className="ml-5" >
-            <Media heading >
-            {lead.name}
-             <h6 className="mt-2" >{lead.designation}</h6>
+
+
+        return(
+            <Fade in>
+            <Media tag="li">
+            <Media left  middle href="#">
+                <Media object src={baseUrl+lead.image} alt="alberto" />
             </Media>
-            <p className="mt-3">{lead.description}</p>
+            <Media body className="ml-5" >
+                <Media heading >
+                {lead.name}
+                 <h6 className="mt-2" >{lead.designation}</h6>
+                </Media>
+                <p className="mt-3">{lead.description}</p>
+            </Media>
         </Media>
-    </Media>
-
-
-
-    );
+        </Fade>
+    
+    
+    
+        );
+    }
+    
 
 
 }
@@ -94,9 +114,11 @@ function RenderLeader({lead}){
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
+                    <Stagger in>
                     <Media list>
                         {leaders}
                     </Media>
+                    </Stagger>
                 </div>
             </div>
         </div>
